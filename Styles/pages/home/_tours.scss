@@ -1,0 +1,184 @@
+@use "../../abstracts/" as *;
+@use 'sass:math';
+
+$_tours-background-color: $color-secondary-dark;
+$-tours-icon-width: 3rem;
+$-tours-animation-duration: 0.25s;
+.tours {
+  background-color: $_tours-background-color;
+  padding-bottom: 8.5rem;
+  position: relative;
+
+  &__container {
+    position: relative;
+    z-index: 1;
+    @include make-container();
+    
+    .tours__heading {
+      color: white;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-align: center;
+      padding-top: 4rem;
+      padding-bottom: 1rem;
+      font-size: 2rem;
+    }
+  }
+  &__cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
+    .tours__card {
+      flex: 0 0 math.div(71rem, 5);
+      height: 21rem;
+      position: relative;
+      margin-top: 3rem;
+      overflow: hidden;
+      scale: 1;
+      z-index: 1;
+      box-shadow: 0 0 0.25rem transparent;
+      transition: transform $-tours-animation-duration ease-in-out, z-index $-tours-animation-duration linear , box-shadow $-tours-animation-duration ease-in-out ;
+      &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 0.25rem black;
+        z-index: 10;
+        transition: transform $-tours-animation-duration ease-in-out, z-index 0s linear, box-shadow $-tours-animation-duration ease-in-out ;
+      }
+
+      &-heading {
+        font-size: 1rem;
+        margin-bottom: .25rem;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      &-location {
+        font-size: 0.9rem;
+        margin-bottom: .6rem;
+        display: flex;
+
+        &-text {
+          line-height: 1.9rem;
+          padding-left: 0.15rem;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+
+        &-icon {
+          font-size: 1.25rem;
+          filter: drop-shadow(0 0 0.5rem black);
+        }
+      }
+      
+      &-desc {
+        font-size: 0.8rem;
+        background-image: linear-gradient(90deg, $color-primary 60%, transparent 60%);
+        background-position-y: top;
+        background-size: 100% .125rem;
+        background-repeat: no-repeat;
+        padding: 1rem 0;
+      }
+      
+      &-icon {
+        width: $-tours-icon-width;
+        color: white;
+        display: block;
+        
+
+        &-background {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: $-tours-icon-width;
+          background-color: $color-primary;
+          width: 100%;
+          transform: translate(calc(-100% + #{$-tours-icon-width}), 0);
+          transition: transform $-tours-animation-duration ease-in-out;
+          box-shadow: 0 0 0.125rem rgba(0, 0, 0, 0.25);
+        }
+        &-container {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          transform: translate(0, 0);
+          transition: transform $-tours-animation-duration ease-in-out;
+        }
+      }
+
+      &-img {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        filter: brightness(80%);
+      }
+
+      &-content {
+        position: absolute;
+        padding: 3rem 1rem 0 1rem;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        color: white;
+        padding: 0 1rem;
+        text-shadow: 0 0 0.125rem black;
+        background-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.25) 20%);
+        transform: translate(0, calc(100% - 4.125rem));
+        transition: transform $-tours-animation-duration ease-in-out;
+      }
+     &:hover .tours__card-icon-background {
+      transform: translate(0, 0);
+    }
+    &:hover .tours__card-content {
+      transform: translate(0, 0);
+    }
+    &:hover .tours__card-icon-container {
+      transform: translate(calc(50% - #{math.div($-tours-icon-width, 2)}), 0);
+    }
+    }
+
+    
+  }
+}
+
+%tours__before-and-after {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  content: "Tame the wild";
+  position: absolute;
+  text-transform: uppercase;
+  color: $_tours-background-color;
+  font-size: min(calc(100vw / 9), 10rem);
+  text-shadow: 0 0 1px white;
+  font-weight: bold;
+  z-index: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@mixin -tours__before-and-after-stroke($color) {
+  @supports (-webkit-text-stroke: 1px white) or (text-stroke: 1px white) {
+    -webkit-text-stroke: 2px $color;
+    text-stroke: 2px $color;
+    text-shadow: none;
+  }
+}
+
+.tours::before {
+  @extend %tours__before-and-after;
+  @include -tours__before-and-after-stroke(rgba(255, 255, 255, 0.2));
+}
+
+.tours::after {
+  @extend %tours__before-and-after;
+
+  @include -tours__before-and-after-stroke(transparent);
+}
+
+

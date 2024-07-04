@@ -1,0 +1,49 @@
+@use '../abstracts/' as *;
+@use 'sass:color';
+
+.button {
+    display: inline-block;
+    border: 0.0625rem solid currentColor;
+    color: $color-primary;
+    text-decoration: none;
+    padding: 1rem 3rem;
+    border-radius: 10000px;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+    &:hover {
+        color: color.scale($color-primary, $lightness: 20%);
+    }
+}
+
+.button--backgound-blur {
+    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(25px);
+}
+
+
+.button--white {
+    color: white;
+    text-shadow: 0 0 0.125rem rgba( 0, 0, 0, 0.5);
+    box-shadow:0 0 0.125rem rgba( 0, 0, 0, 0.5);
+
+    &:hover {
+        color: rgb(230, 230, 230);
+    }
+}
+
+.button--secondary {
+    background-color: $color-secondary;
+    color: white;
+    border: 0.125rem solid $color-secondary;
+    &:hover {
+        color: white;
+        background-color: $color-secondary-dark;
+        border: 0.125rem solid $color-secondary-dark;
+    }
+}
+
+.button--slim {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}

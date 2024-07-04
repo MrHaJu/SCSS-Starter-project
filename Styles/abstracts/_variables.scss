@@ -1,0 +1,27 @@
+@use "sass:color";
+@use 'sass:math';
+
+$color-primary: rgb(0, 226,156)!default;
+$color-secondary: #26464d!default;
+$color-secondary-light: color.scale($color-secondary, $lightness: 20%)!default;
+$color-secondary-dark: #011820!default;
+
+$slope-incline: math.asin(0.1);
+
+/** Breakpoints */
+/** 1200px oder weniger */
+$breakpoint-lg: 75em; 
+/** 992px oder weniger */
+$breakpoint-md: 62em;
+/** 768px oder weniger */
+$breakpoint-sm: 48em;
+/** 576px oder weniger */
+$breakpoint-xs: 36em;
+
+$breakpoint-xxs: 24em;
+
+
+@media (max-width: $breakpoint-lg) {}
+@media (max-width: $breakpoint-md) {}
+@media (max-width: $breakpoint-sm) {}
+@media (max-width: $breakpoint-xs) {}
